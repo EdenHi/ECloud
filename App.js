@@ -1,45 +1,42 @@
-import React, {useEffect, useState} from 'react';
-import {
-  Button,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+// In App.js in a new project
 
-// 路由容器
+import * as React from 'react';
+import {View, Text, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-// 栈式导航
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import APage from './src/views/APage';
 import BPage from './src/views/BPage';
 import CPage from './src/views/CPage';
-import DPage from './src/views/DPage';
-import APage from './src/views/APage';
+
+function HomeScreen({navigation}) {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Home Screen</Text>
+      <Button
+        title={'Jump to APage'}
+        onPress={() => {
+          navigation.navigate('APage');
+        }}
+      />
+    </View>
+  );
+}
+
 const Stack = createNativeStackNavigator();
-const App = () => {
+
+function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: {backgroundColor: 'red'},
-          headerTitleStyle: {color: 'white'},
-        }}>
-        <Stack.Screen
-          name="A"
-          component={APage}
-          options={{
-            headerTitle: '首页',
-            headerStyle: {backgroundColor: 'orangered'},
-          }}
-        />
-        <Stack.Screen name="B" component={BPage} />
-        <Stack.Screen name="C" component={CPage} />
-        <Stack.Screen name="D" component={DPage} />
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="APage" component={APage} />
+
+        <Stack.Screen name="BPage" component={BPage} />
+
+        <Stack.Screen name="CPage" component={CPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
-};
+}
+
 export default App;
